@@ -19,6 +19,9 @@ function ListBooks (props) {
 		}
 	]
 
+	const { books } = props
+	const readbooks = books.filter((book) =>( book.shelf === 'read'))
+
 	return (
 		<div className="list-books">
 			
@@ -33,6 +36,12 @@ function ListBooks (props) {
 					<div key={bookshelf.id} className={bookshelf.name}>
 						<h2 className='bookshelf-title'>{bookshelf.name}</h2>
 						<div className="bookshelf-books">
+							<ol className="books-grid">
+								{books
+									.filter((book) =>( book.shelf === bookshelf.id))
+									.map((book) => <p>{book.title}</p>)
+								}
+							</ol>	
 						</div>
 					</div>
 				)}
