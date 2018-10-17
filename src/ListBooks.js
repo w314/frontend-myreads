@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import ShowBook from './ShowBook'
 
 function ListBooks (props) {
 	

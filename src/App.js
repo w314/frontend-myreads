@@ -18,6 +18,7 @@ class BooksApp extends React.Component {
   }
 
   render() {
+    console.log('after getting books')
     console.log(this.state.books)
     return (
       <div className="app">
