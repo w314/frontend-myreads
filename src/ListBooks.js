@@ -3,6 +3,22 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 function ListBooks (props) {
+	
+	const bookshelves = [
+		{
+			id: 'wantToRead',
+			name: 'Want To Read'
+		},
+		{
+			id: 'currentlyReading',
+			name: 'Currently Reading'
+		},
+		{
+			id: 'read',
+			name: 'Read'
+		}
+	]
+
 	return (
 		<div className="list-books">
 			
@@ -13,7 +29,7 @@ function ListBooks (props) {
 		  
 		  {/* Bookshelves */}
 			<div className='list-books-content'>
-				{props.bookshelves.map((bookshelf) => 
+				{bookshelves.map((bookshelf) => 
 					<div key={bookshelf.id} className={bookshelf.name}>
 						<h2 className='bookshelf-title'>{bookshelf.name}</h2>
 						<div className="bookshelf-books">
