@@ -6,17 +6,25 @@ import ListBooks from './ListBooks'
 import AddBooks from './AddBooks'
 
 class BooksApp extends React.Component {
+  
   state = {
     books : []
   }
 
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
+  }
+
   render() {
+    console.log(this.state.books)
     return (
       <div className="app">
         <Route path="/addBooks" component={AddBooks} />
         <Route exact path="/" render={() => (
           <ListBooks
-            bookshelves={this.state.bookshelves}
+            books={this.state.books}
           />          
         )}/>
       </div>

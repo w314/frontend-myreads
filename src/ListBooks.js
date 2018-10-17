@@ -50,7 +50,7 @@ function ListBooks (props) {
 }
 
 ListBooks.propTypes = {
-	bookshelves: PropTypes.array.isRequired
+	books: PropTypes.array.isRequired
 }
 
 export default ListBooks
