@@ -48,6 +48,7 @@ class AddBooks extends React.Component {
 
 			  <div className="search-books-results">
 			    <ol className="books-grid">
+			    	{console.log(this.props.booksOnShelf)}
 		    		{this.state.books.map((book) => 
 		    			<ShowBook 
 		    				booksOnShelf={this.props.booksOnShelf}
