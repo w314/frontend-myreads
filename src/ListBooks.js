@@ -3,25 +3,16 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ShowBook from './ShowBook'
 
+{/*									.map((book) => <p>{book.title}</p>) */}
 function ListBooks (props) {
 	
 	const bookshelves = [
-		{
-			id: 'wantToRead',
-			name: 'Want To Read'
-		},
-		{
-			id: 'currentlyReading',
-			name: 'Currently Reading'
-		},
-		{
-			id: 'read',
-			name: 'Read'
-		}
+		{	id: 'wantToRead',	name: 'Want To Read' },
+		{	id: 'currentlyReading',	name: 'Currently Reading'	},
+		{	id: 'read', name: 'Read' }
 	]
 
-	const { books } = props
-	const readbooks = books.filter((book) =>( book.shelf === 'read'))
+	const { booksOnShelf } = props
 
 	return (
 		<div className="list-books">
@@ -38,9 +29,10 @@ function ListBooks (props) {
 						<h2 className='bookshelf-title'>{bookshelf.name}</h2>
 						<div className="bookshelf-books">
 							<ol className="books-grid">
-								{books
+							{console.log(booksOnShelf)}
+								{booksOnShelf
 									.filter((book) =>( book.shelf === bookshelf.id))
-									.map((book) => <p>{book.title}</p>)
+									.map((book) => <ShowBook key={book.id} booksOnShelf={booksOnShelf} book={book} />)
 								}
 							</ol>	
 						</div>
@@ -60,7 +52,7 @@ function ListBooks (props) {
 }
 
 ListBooks.propTypes = {
-	books: PropTypes.array.isRequired
+	booksOnShelf: PropTypes.array.isRequired
 }
 
 export default ListBooks

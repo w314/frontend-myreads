@@ -1,36 +1,50 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+
 function ShowBook (props) {
-	
-	const { book } = this.props
+
+	const { booksOnShelf, book } = props
+
+	console.log(booksOnShelf)
 
 	return (
+
 		<li key={book.id}>
 		  <div className="book">
 		    <div className="book-top">
+			}
 {/*
-TODO: change background based on book
-			change authors
+TODO: 
 			show which shelf book is on
 */}
-		      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")' }}></div>
+		      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
 		      <div className="book-shelf-changer">
-		        <select>
+		        <select defaultValue={booksOnShelf.includes(book) ? book.shelf : 'none'}>
 		          <option value="move" disabled>Move to...</option>
 		          <option value="currentlyReading">Currently Reading</option>
 		          <option value="wantToRead">Want to Read</option>
 		          <option value="read">Read</option>
 		          <option value="none">None</option>
 		        </select>
+
 		      </div>
 		    </div>
 		    <div className="book-title">{book.title}</div>
-		    <div className="book-authors">Harper Lee</div>
+		    <div className="book-authors">
+		    	{book.authors.map((author) => 
+		    		<p key={`${book.id}_${author}`}>{author}</p> 
+		  		)}
+		  	</div>
 		  </div>
 		</li>
 
 	)
+}
+
+ShowBook.propTypes = {
+	book : PropTypes.object.isRequired,
+	booksOnShelf : PropTypes.array.isRequired
 }
 
 export default ShowBook

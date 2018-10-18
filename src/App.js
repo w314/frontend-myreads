@@ -8,24 +8,28 @@ import AddBooks from './AddBooks'
 class BooksApp extends React.Component {
   
   state = {
-    books : []
+    booksOnShelf : []
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({books})
+    BooksAPI.getAll().then((booksOnShelf) => {
+      this.setState({booksOnShelf})
     })
   }
 
   render() {
     console.log('after getting books')
-    console.log(this.state.books)
+    console.log(this.state.booksOnShelf)
     return (
       <div className="app">
-        <Route path="/addBooks" component={AddBooks} />
+        <Route path="/addBooks" render={() => (
+          <AddBooks
+            booksOnShelf={this.state.booksOnShelf}
+          />
+        )}/>
         <Route exact path="/" render={() => (
           <ListBooks
-            books={this.state.books}
+            booksOnShelf={this.state.booksOnShelf}
           />          
         )}/>
       </div>
