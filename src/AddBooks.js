@@ -52,7 +52,8 @@ class AddBooks extends React.Component {
 		    		{this.state.books.map((book) => 
 		    			<ShowBook 
 		    				booksOnShelf={this.props.booksOnShelf}
-			    			book={book} 
+			    			book={book}
+			    			onShelfChange={this.props.onShelfChange}
 			    		/>
 			    	)}
 									    
