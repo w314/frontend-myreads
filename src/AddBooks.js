@@ -50,7 +50,8 @@ class AddBooks extends React.Component {
 			    <ol className="books-grid">
 			    	{console.log(this.props.booksOnShelf)}
 		    		{this.state.books.map((book) => 
-		    			<ShowBook 
+		    			<ShowBook
+		    				key={book.id}
 		    				booksOnShelf={this.props.booksOnShelf}
 			    			book={book}
 			    			onShelfChange={this.props.onShelfChange}
