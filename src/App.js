@@ -11,25 +11,44 @@ class BooksApp extends React.Component {
     booksOnShelf : []
   }
 
-  componentDidMount() {
-    BooksAPI.getAll().then((booksOnShelf) => {
+  getBooksOnShelf = () => {
+    BooksAPI.getAll()
+    .then((booksOnShelf) => {
       this.setState({booksOnShelf})
-    })
+    })  
+    console.log('after updating state')
+    console.log(this.state)
+  }
+
+  changeBookShelf = (book, shelf) => {
+    console.log(this.state)
+    console.log(book, shelf)
+    BooksAPI.update(book, shelf)
+    .then((result) => console.log(result))
+    .then(this.getBooksOnShelf)
+    .then(console.log('bookshelf downloaded after change'))
+    .then(console.log(this.state))
+  }
+  
+
+  componentDidMount() {
+    this.getBooksOnShelf()
   }
 
   render() {
-    console.log('after getting books')
-    console.log(this.state.booksOnShelf)
     return (
       <div className="app">
+        {console.log('rendering')}
         <Route path="/addBooks" render={() => (
           <AddBooks
             booksOnShelf={this.state.booksOnShelf}
+            onShelfChange={this.changeBookShelf}
           />
         )}/>
         <Route exact path="/" render={() => (
           <ListBooks
             booksOnShelf={this.state.booksOnShelf}
+            onShelfChange={this.changeBookShelf}
           />          
         )}/>
       </div>
