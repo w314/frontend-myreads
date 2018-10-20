@@ -10,17 +10,28 @@ class AddBooks extends React.Component {
 		books : []
 	}
 
-
 	filterBooks = (query) => {
 		this.setState({query})
 		BooksAPI.search(query)
-		.then((books) => this.setState({books}))
+		.then((books) => {
+			// if search comes back with a set of books
+			// update state
+			if (books && !books.hasOwnProperty('error')) {
+				this.setState({books})
+			// if search comes back with empty query error
+			// due to query string being an invalid filter term
+			// or comes back as undefined 
+			// due to an empty query string
+			// set state.books = []
+			} else {
+				this.setState({books: []})
+			}	
+		})
 	}
 
 
+
 	render () {
-		console.log(this.state)
-		console.log(this.props)
 		return (
 			<div className="search-books">
 			  <div className="search-books-bar">
@@ -48,8 +59,7 @@ class AddBooks extends React.Component {
 
 			  <div className="search-books-results">
 			    <ol className="books-grid">
-			    	{console.log(this.props.booksOnShelf)}
-		    		{this.state.books.map((book) => 
+	    			{this.state.books.map((book) => 
 		    			<ShowBook
 		    				key={book.id}
 		    				booksOnShelf={this.props.booksOnShelf}

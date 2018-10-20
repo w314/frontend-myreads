@@ -16,13 +16,9 @@ class BooksApp extends React.Component {
     .then((booksOnShelf) => {
       this.setState({booksOnShelf})
     })  
-    console.log('after updating state')
-    console.log(this.state)
   }
 
   changeBookShelf = (book, shelf) => {
-    console.log(this.state)
-    console.log(book, shelf)
     BooksAPI.update(book, shelf)
     .then((result) => console.log(result))
     .then(this.getBooksOnShelf)
@@ -38,7 +34,6 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {console.log('rendering')}
         <Route path="/addBooks" render={() => (
           <AddBooks
             booksOnShelf={this.state.booksOnShelf}
